@@ -1,0 +1,10 @@
+profile: public-oss
+owner: IoannisManouris
+repository: pin-breacher
+description: "A small C++ console demo that guesses a sample numeric PIN entered by the player."
+visibility: public
+default_branch: main
+license: unlicensed
+status: historical-source
+topics: [cpp, command-line, simulation, learning]
+release_policy: no-versioned-releases

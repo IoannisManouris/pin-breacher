@@ -1,0 +1,16 @@
+name: Verify
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Compile and exercise the console
+        run: |
+          mkdir -p build
+          g++ -std=c++17 -Wall -Wextra -pedantic breacher.cpp -o build/pin-breacher
+          result=$(printf 'abc\n7\nN\n' | ./build/pin-breacher)
+          grep -q 'Use one to four digits' <<< "$result"
+          grep -q 'Successfully brute forced after' <<< "$result"

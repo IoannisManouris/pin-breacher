@@ -21,10 +21,11 @@ int main() {
 
         std::string password;
 
-        while (password.empty()) {
-            std::cout << "Enter password: ";
-            std::cin >> password;
-            password.erase(std::remove_if(password.begin(), password.end(), ::isspace), password.end());
+        while (true) {
+            std::cout << "Enter a sample PIN (1 to 4 digits): ";
+            if (!(std::cin >> password)) return 0;
+            if (password.size() <= 4 && password.find_first_not_of("0123456789") == std::string::npos) break;
+            std::cout << "Use one to four digits.\n";
         }
 
         std::string tempPassword;
@@ -54,12 +55,12 @@ int main() {
         std::string response;
 
         std::cout << "Replay? (Y/N): ";
-        std::cin >> response;
+        if (!(std::cin >> response)) return 0;
 
         while(response != "Y" && response != "y" && response != "N" && response != "n"){
             std::cout << "Only respond with a Y for yes, and a N for no!" << "\n";
             std::cout << "Replay? (Y/N): ";
-            std::cin >> response;
+            if (!(std::cin >> response)) return 0;
         }
 
         if(response == "Y" || response == "y"){
